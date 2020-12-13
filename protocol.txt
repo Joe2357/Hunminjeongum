@@ -1,0 +1,39 @@
+# Client -> Server protocol
+## notify client info 
+  - [SETNICK] (nickname): Notify the server that it will use this nickname
+
+## chatting format
+  - [CHATMESSAGE] (message) : chat message entered by client
+
+## game progress format
+  - [STARTGAME] : Try to start the game
+  - [GAMEACK] : reply ack about starting the game
+  - [SUBMIT] (word) : enter word and send to server
+  - [ENDACK] : reply ack about quit of game
+  - [VOTED] (0/1) : agree/disagree vote ( 0 = disagree, 1 = agree )
+  
+# Server -> Client protocol
+## Client entry/exit format
+  - [ACCEPTNICK] : client can use the nickname. permission to enter the game
+  - [DECLINENICK] : cannot use nickname (duplicate). no admission to enter the game
+  - [FULL] : the play room is full. no admission to enter the game
+  - [ALREADYSTARTED] : the game is already in progress. no admission to enter the game
+  - [JOIN] (order) (nickname) : Player enters position n (order)
+  - [QUIT] (order): player #n exits 
+
+## Client management format
+  - [MESSAGE] (message) : send chat messages to all clients
+
+## game progress format
+  - [GAMESTART] : notify that the game has already started
+  - [GAMEEND] : notify that the game is over
+  - [SETINFO] (Initial) : notify that the game will be played with this Initial
+  - [HISTURN] (order n) : notify that it is player n's turn
+  - [YOURTURN] : Let client know it's client's turn
+  - [SUBMITTED] (oder n) (word) : Player #n entered a word
+  - [VOTE] : notify all players to vote
+  - [DEAD] (order n) : Player #n is dead
+  - [LIVE] (order n) : Player #n is alive
+  - [GAMEEND] : notify the client that the game is over
+  - [RANKING] (sentence) : Provide ranking information
+    - sentence: #name1#name2#name3...
